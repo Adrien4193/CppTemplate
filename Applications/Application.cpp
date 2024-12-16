@@ -1,17 +1,17 @@
 #include <Template/Lib1/Lib1.h>
 #include <Template/Lib2/Lib2.h>
 
-#include <iostream>
+#include <fmt/format.h>
 
 int main(int argc, const char **argv)
 {
-    std::cout << argc << '\n';
+    fmt::println("argc: {}", argc);
 
     for (auto i = 0; i < argc; ++i)
     {
-        std::cout << argv[i] << '\n';
+        fmt::println("argv [{}]: {}", i, argv[i]);
     }
 
-    Template::Lib1();
-    Template::Lib2();
+    fmt::println("Lib1: {}", Template::Lib1(1));
+    fmt::println("Lib2: {}", Template::Lib2(2));
 }

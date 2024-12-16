@@ -1,11 +1,9 @@
 #include "Lib2.h"
 
-#include <iostream>
-
 namespace Template
 {
-    void Lib2()
+    int Lib2(int value)
     {
-        std::cout << "Lib2\n";
+        return value + 1;
     }
 }

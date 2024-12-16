@@ -6,6 +6,12 @@ option(BUILD_SHARED_LIBS "Build using shared libraries" ON)
 option(ENABLE_APPLICATIONS "Build applications" ON)
 option(ENABLE_TESTS "Build tests" ON)
 
+find_package(fmt CONFIG REQUIRED)
+
+if(ENABLE_TESTS)
+    find_package(doctest CONFIG REQUIRED)
+endif()
+
 list(PREPEND CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/CMake)
 
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
@@ -34,6 +40,7 @@ if(ENABLE_APPLICATIONS)
 endif()
 
 if(ENABLE_TESTS)
+    find_package(doctest CONFIG REQUIRED)
     include(CTest)
     add_subdirectory(Tests)
 endif()

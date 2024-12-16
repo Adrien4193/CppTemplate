@@ -1,4 +1,4 @@
 namespace Template
 {
-    TEMPLATE_LIB1_API void Lib1();
+    TEMPLATE_LIB1_API int Lib1(int value);
 }

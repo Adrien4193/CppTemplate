@@ -1,11 +1,13 @@
 #include "Lib1.h"
 
-#include <iostream>
+#include <fmt/format.h>
 
 namespace Template
 {
-    void Lib1()
+    int Lib1(int value)
     {
-        std::cout << "Lib1\n";
+        fmt::println("Lib1 value: {}", value);
+
+        return value;
     }
 }

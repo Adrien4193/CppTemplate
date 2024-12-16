@@ -5,10 +5,11 @@
             "name": "default",
             "hidden": true,
             "binaryDir": "${sourceDir}/Build/${presetName}",
-            "installDir": "${sourceDir}/Install/${presetName}"
+            "installDir": "${sourceDir}/Install/${presetName}",
+            "toolchainFile": "$env{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake"
         },
         {
-            "name": "window-x64",
+            "name": "windows-x64",
             "displayName": "Window x64",
             "inherits": "default",
             "generator": "Visual Studio 17 2022",
@@ -27,13 +28,13 @@
         {
             "name": "debug",
             "displayName": "Debug",
-            "configurePreset": "window-x64",
+            "configurePreset": "windows-x64",
             "configuration": "Debug"
         },
         {
             "name": "release",
             "displayName": "Release",
-            "configurePreset": "window-x64",
+            "configurePreset": "windows-x64",
             "configuration": "Release"
         }
     ],
@@ -41,7 +42,7 @@
         {
             "name": "default",
             "hidden": true,
-            "configurePreset": "window-x64",
+            "configurePreset": "windows-x64",
             "output": {
                 "outputOnFailure": true
             },
