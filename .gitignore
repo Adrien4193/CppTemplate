@@ -1,6 +1,7 @@
 .vs
 .vscode
 vcpkg
-Build
-Install
+[Bb]in
+[Bb]uild
+[Ii]nstall
 CMakeUserPresets.json

@@ -2,11 +2,23 @@
 
 My C++ template project (Windows only for now).
 
-Requires installing Visual Studio 2022, CMake and vcpkg.
+## Requirements
 
-In case of issues, reload the window ;)
+* [Visual Studio 2022](https://visualstudio.microsoft.com/downloads/#remote-tools-for-visual-studio-2022).
+* [CMake](https://cmake.org/download).
+* [Ninja](https://ninja-build.org).
+* [vcpkg](https://learn.microsoft.com/en-us/vcpkg/get_started/get-started).
 
-For VSCode usage, add the following user files:
+## Visual Studio Build Tools and Ninja
+
+Replace CMake executable by the following script (cmake.bat):
+
+```shell
+call "C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\Tools\VsDevCmd.bat"
+cmake %*
+```
+
+## VSCode
 
 Example tasks.json for vscode to build with CMake using Ctrl+Shift+B:
 
@@ -58,18 +70,20 @@ Example launch.json for vscode to debug apps and tests:
 }
 ```
 
-Example CMakeUserPresets.json to add vcpkg environment variable to download dependencies (edit VCPKG_ROOT!!!):
+Example CMakeUserPresets.json to add custom paths in presets:
 
 ```json
 {
     "version": 5,
     "configurePresets": [
         {
-            "name": "user-windows-x64",
-            "displayName": "User Windows x64",
-            "inherits": "windows-x64",
-            "environment": {
-                "VCPKG_ROOT": "path/tovcpkg"
+            "name": "user-windows",
+            "displayName": "User Windows",
+            "inherits": "windows",
+            "toolchainFile": "${sourceDir}/../vcpkg/scripts/buildsystems/vcpkg.cmake",
+            "cmakeExecutable": "${sourceDir}/Bin/cmake.bat",
+            "cacheVariables": {
+                "CMAKE_MAKE_PROGRAM": "${sourceDir}/Bin/ninja.exe"
             }
         }
     ],
@@ -77,28 +91,28 @@ Example CMakeUserPresets.json to add vcpkg environment variable to download depe
         {
             "name": "user-debug",
             "displayName": "User debug",
-            "inherits": "debug",
-            "configurePreset": "user-windows-x64"
+            "inherits": "windows-debug",
+            "configurePreset": "user-windows"
         },
         {
             "name": "user-release",
             "displayName": "User release",
-            "inherits": "release",
-            "configurePreset": "user-windows-x64"
+            "inherits": "windows-release",
+            "configurePreset": "user-windows"
         }
     ],
     "testPresets": [
         {
             "name": "user-debug",
-            "inherits": "debug",
+            "inherits": "windows-debug",
             "displayName": "User debug",
-            "configurePreset": "user-windows-x64"
+            "configurePreset": "user-windows"
         },
         {
             "name": "user-release",
-            "inherits": "release",
+            "inherits": "windows-release",
             "displayName": "User release",
-            "configurePreset": "user-windows-x64"
+            "configurePreset": "user-windows"
         }
     ]
 }

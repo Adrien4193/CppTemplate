@@ -4,19 +4,14 @@
         {
             "name": "default",
             "hidden": true,
+            "generator": "Ninja",
             "binaryDir": "${sourceDir}/Build/${presetName}",
-            "installDir": "${sourceDir}/Install/${presetName}",
-            "toolchainFile": "$env{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake"
+            "installDir": "${sourceDir}/Install/${presetName}"
         },
         {
-            "name": "windows-x64",
-            "displayName": "Window x64",
+            "name": "windows",
+            "displayName": "Windows",
             "inherits": "default",
-            "generator": "Visual Studio 17 2022",
-            "architecture": {
-                "value": "x64",
-                "strategy": "set"
-            },
             "condition": {
                 "type": "equals",
                 "lhs": "${hostSystemName}",
@@ -26,23 +21,23 @@
     ],
     "buildPresets": [
         {
-            "name": "debug",
-            "displayName": "Debug",
-            "configurePreset": "windows-x64",
+            "name": "windows-debug",
+            "displayName": "Windows Debug",
+            "configurePreset": "windows",
             "configuration": "Debug"
         },
         {
-            "name": "release",
-            "displayName": "Release",
-            "configurePreset": "windows-x64",
+            "name": "windows-release",
+            "displayName": "Windows Release",
+            "configurePreset": "windows",
             "configuration": "Release"
         }
     ],
     "testPresets": [
         {
-            "name": "default",
+            "name": "windows",
             "hidden": true,
-            "configurePreset": "windows-x64",
+            "configurePreset": "windows",
             "output": {
                 "outputOnFailure": true
             },
@@ -52,15 +47,15 @@
             }
         },
         {
-            "name": "debug",
-            "displayName": "Debug",
-            "inherits": "default",
+            "name": "windows-debug",
+            "displayName": "Windows Debug",
+            "inherits": "windows",
             "configuration": "Debug"
         },
         {
-            "name": "release",
-            "displayName": "Release",
-            "inherits": "default",
+            "name": "windows-release",
+            "displayName": "Windows Release",
+            "inherits": "windows",
             "configuration": "Release"
         }
     ]

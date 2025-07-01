@@ -9,7 +9,7 @@ option(ENABLE_TESTS "Build tests" ON)
 find_package(fmt CONFIG REQUIRED)
 
 if(ENABLE_TESTS)
-    find_package(doctest CONFIG REQUIRED)
+    find_package(GTest CONFIG REQUIRED)
 endif()
 
 list(PREPEND CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/CMake)
@@ -33,14 +33,13 @@ else()
     add_compile_options(-Wall -Wextra -Wpedantic -Wconversion)
 endif()
 
-add_subdirectory(Source)
+add_subdirectory(Source/Template)
 
 if(ENABLE_APPLICATIONS)
     add_subdirectory(Applications)
 endif()
 
 if(ENABLE_TESTS)
-    find_package(doctest CONFIG REQUIRED)
     include(CTest)
     add_subdirectory(Tests)
 endif()

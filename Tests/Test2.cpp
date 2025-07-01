@@ -1,10 +1,10 @@
-#include <doctest/doctest.h>
+#include <gtest/gtest.h>
 
 #include <Template/Lib2/Lib2.h>
 
 using namespace Template;
 
-TEST_CASE("Lib2")
+TEST(Lib2, Dummy)
 {
-    CHECK_EQ(Lib2(2), 3);
+    EXPECT_EQ(Lib2(2), 3);
 }

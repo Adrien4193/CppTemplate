@@ -1,8 +1,8 @@
 {
-  "name": "template",
-  "version": "0.1.0",
-  "dependencies": [
-    "fmt",
-    "doctest"
-  ]
+    "name": "template",
+    "version": "0.1.0",
+    "dependencies": [
+        "fmt",
+        "gtest"
+    ]
 }
