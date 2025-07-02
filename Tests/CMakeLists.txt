@@ -6,4 +6,4 @@ target_include_directories(Tests PRIVATE ${CMAKE_CURRENT_LIST_DIR})
 target_link_libraries(Tests PRIVATE Lib1 Lib2 GTest::gtest_main)
 
 include(GoogleTest)
-gtest_discover_tests(Tests)
+gtest_add_tests(TARGET Tests)

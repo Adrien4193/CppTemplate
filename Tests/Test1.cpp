@@ -4,7 +4,12 @@
 
 using namespace Template;
 
-TEST(Lib1, Dummy)
+TEST(Lib1, Dummy1)
 {
     EXPECT_EQ(Lib1(1), 1);
+}
+
+TEST(Lib1, Dummy2)
+{
+    EXPECT_EQ(Lib1(2), 2);
 }
