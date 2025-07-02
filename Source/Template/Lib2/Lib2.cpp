@@ -1,8 +1,8 @@
-#include "Lib2.h"
+#include "Lib2.hpp"
 
 namespace Template
 {
-    int Lib2(int value)
+    auto Lib2(int value) -> int
     {
         return value + 1;
     }

@@ -1,9 +1,9 @@
-#include <Template/Lib1/Lib1.h>
-#include <Template/Lib2/Lib2.h>
+#include <Template/Lib1/Lib1.hpp>
+#include <Template/Lib2/Lib2.hpp>
 
 #include <fmt/format.h>
 
-int main(int argc, const char **argv)
+auto main(int argc, const char **argv) -> int
 {
     fmt::println("argc: {}", argc);
 

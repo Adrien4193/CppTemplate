@@ -20,7 +20,17 @@ cmake %*
 
 ## VSCode
 
-Example tasks.json for vscode to build with CMake using Ctrl+Shift+B:
+Example settings.json to ignore GoogleTest warnings with clang-tidy:
+
+```json
+{
+    "C_Cpp.codeAnalysis.exclude": {
+        "Tests/": true
+    }
+}
+```
+
+Example tasks.json to build with CMake using Ctrl+Shift+B:
 
 ```json
 {
@@ -42,7 +52,7 @@ Example tasks.json for vscode to build with CMake using Ctrl+Shift+B:
 }
 ```
 
-Example launch.json for vscode to debug apps and tests:
+Example launch.json to debug apps and tests:
 
 ```json
 {

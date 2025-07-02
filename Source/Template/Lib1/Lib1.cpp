@@ -1,10 +1,10 @@
-#include "Lib1.h"
+#include "Lib1.hpp"
 
 #include <fmt/format.h>
 
 namespace Template
 {
-    int Lib1(int value)
+    auto Lib1(int value) -> int
     {
         fmt::println("Lib1 value: {}", value);
 

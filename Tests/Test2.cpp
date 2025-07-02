@@ -1,6 +1,6 @@
 #include <gtest/gtest.h>
 
-#include <Template/Lib2/Lib2.h>
+#include <Template/Lib2/Lib2.hpp>
 
 using namespace Template;
 
