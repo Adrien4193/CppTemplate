@@ -36,8 +36,7 @@
             "inherits": "default",
             "cacheVariables": {
                 "CMAKE_BUILD_TYPE": "Release",
-                "ENABLE_TESTS": false,
-                "CMAKE_EXPORT_COMPILE_COMMANDS": false
+                "ENABLE_TESTS": false
             }
         }
     ],
@@ -67,7 +66,9 @@
             "displayName": "Windows",
             "configurePreset": "distribution",
             "vendorName": "Adrien4193",
+            "packageDirectory": "packages",
             "generators": [
+                "NSIS64",
                 "ZIP"
             ]
         }

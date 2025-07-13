@@ -8,6 +8,7 @@ My C++ template project (Windows only for now).
 * [CMake](https://cmake.org/download).
 * [Ninja](https://ninja-build.org).
 * [vcpkg](https://learn.microsoft.com/en-us/vcpkg/get_started/get-started).
+* [NSIS](https://nsis.sourceforge.io/Download).
 
 ## Visual Studio Build Tools and Ninja
 

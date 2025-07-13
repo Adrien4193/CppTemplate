@@ -24,6 +24,7 @@ function(configure_library TARGET HEADERS SOURCES)
     define_export_macro(${TARGET})
 
     include(GNUInstallDirs)
+
     install(
         TARGETS ${TARGET}
         EXPORT ${PROJECT_NAME}Targets
