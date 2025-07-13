@@ -84,45 +84,56 @@ Example CMakeUserPresets.json to add custom paths in presets:
 
 ```json
 {
-    "version": 5,
+    "version": 10,
     "configurePresets": [
         {
-            "name": "user-windows",
-            "displayName": "User Windows",
-            "inherits": "windows",
+            "name": "user-default",
+            "hidden": true,
             "toolchainFile": "${sourceDir}/../vcpkg/scripts/buildsystems/vcpkg.cmake",
             "cmakeExecutable": "${sourceDir}/Bin/cmake.bat",
             "cacheVariables": {
                 "CMAKE_MAKE_PROGRAM": "${sourceDir}/Bin/ninja.exe"
             }
-        }
-    ],
-    "buildPresets": [
+        },
         {
             "name": "user-debug",
-            "displayName": "User debug",
-            "inherits": "windows-debug",
-            "configurePreset": "user-windows"
+            "displayName": "User Debug",
+            "inherits": [
+                "user-default",
+                "debug"
+            ]
         },
         {
             "name": "user-release",
-            "displayName": "User release",
-            "inherits": "windows-release",
-            "configurePreset": "user-windows"
+            "displayName": "User Release",
+            "inherits": [
+                "user-default",
+                "release"
+            ]
+        },
+        {
+            "name": "user-distribution",
+            "displayName": "User Distribution",
+            "inherits": [
+                "user-default",
+                "distribution"
+            ]
         }
     ],
     "testPresets": [
         {
             "name": "user-debug",
-            "inherits": "windows-debug",
+            "inherits": "debug",
             "displayName": "User debug",
-            "configurePreset": "user-windows"
-        },
+            "configurePreset": "user-debug"
+        }
+    ],
+    "packagePresets": [
         {
-            "name": "user-release",
-            "inherits": "windows-release",
-            "displayName": "User release",
-            "configurePreset": "user-windows"
+            "name": "user-windows",
+            "inherits": "windows",
+            "displayName": "User Windows",
+            "configurePreset": "user-distribution"
         }
     ]
 }
