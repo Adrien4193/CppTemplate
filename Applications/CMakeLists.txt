@@ -6,5 +6,4 @@ target_link_libraries(
     PRIVATE
     Template::Lib1
     Template::Lib2
-    fmt::fmt
 )

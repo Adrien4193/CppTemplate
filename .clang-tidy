@@ -10,10 +10,7 @@ Checks:
   - portability-*
   - readability-*
   - -cppcoreguidelines-avoid-magic-numbers
-  - -cppcoreguidelines-missing-std-forward
   - -cppcoreguidelines-pro-*
-  - -misc-include-cleaner
-  - -modernize-use-nodiscard
   - -readability-identifier-length
   - -readability-magic-numbers
 
