@@ -4,31 +4,38 @@ My C++ template project (Windows only for now).
 
 ## Requirements
 
-* [Visual Studio 2022](https://visualstudio.microsoft.com/downloads/#remote-tools-for-visual-studio-2022).
-* [CMake](https://cmake.org/download).
-* [Ninja](https://ninja-build.org).
-* [vcpkg](https://learn.microsoft.com/en-us/vcpkg/get_started/get-started).
-* [NSIS](https://nsis.sourceforge.io/Download).
-
-## Visual Studio Build Tools and Ninja
-
-Replace CMake executable by the following script (cmake.bat):
-
-```shell
-call "C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\Tools\VsDevCmd.bat"
-cmake %*
-```
+- [Visual Studio 2022](https://visualstudio.microsoft.com/downloads/#remote-tools-for-visual-studio-2022).
+- [CMake](https://cmake.org/download).
+- [Ninja](https://ninja-build.org).
+- [vcpkg](https://learn.microsoft.com/en-us/vcpkg/get_started/get-started).
+- [NSIS](https://nsis.sourceforge.io/Download).
 
 ## VSCode
 
-Example settings.json to ignore GoogleTest warnings with clang-tidy:
+Example settings.json to have:
+
+- A custom terminal with Visual Studio Developer PowerShell.
+- CMake able to find cl.exe.
+- Ignore GoogleTest warnings with clang-tidy.
 
 ```json
 {
+    "terminal.integrated.profiles.windows": {
+        "Developer PowerShell": {
+            "source": "PowerShell",
+            "args": [
+                "-NoExit",
+                "-Command",
+                "& \"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\Tools\\VsDevCmd.bat\""
+            ]
+        }
+    },
+    "cmake.useVsDeveloperEnvironment": "always",
     "C_Cpp.codeAnalysis.exclude": {
         "Tests/": true
     }
 }
+
 ```
 
 Example tasks.json to build with CMake using Ctrl+Shift+B:
@@ -81,7 +88,7 @@ Example launch.json to debug apps and tests:
 }
 ```
 
-Example CMakeUserPresets.json to add custom paths in presets:
+Example CMakeUserPresets.json to add custom paths to Ninja and vcpkg in presets:
 
 ```json
 {
@@ -91,7 +98,6 @@ Example CMakeUserPresets.json to add custom paths in presets:
             "name": "user-default",
             "hidden": true,
             "toolchainFile": "${sourceDir}/../vcpkg/scripts/buildsystems/vcpkg.cmake",
-            "cmakeExecutable": "${sourceDir}/Bin/cmake.bat",
             "cacheVariables": {
                 "CMAKE_MAKE_PROGRAM": "${sourceDir}/Bin/ninja.exe"
             }
