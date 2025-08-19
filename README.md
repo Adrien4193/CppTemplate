@@ -4,11 +4,12 @@ My C++ template project (Windows only for now).
 
 ## Requirements
 
+- [Git](https://git-scm.com/downloads).
 - [Visual Studio 2022](https://visualstudio.microsoft.com/downloads/#remote-tools-for-visual-studio-2022).
 - [CMake](https://cmake.org/download).
 - [Ninja](https://ninja-build.org).
-- [vcpkg](https://learn.microsoft.com/en-us/vcpkg/get_started/get-started).
-- [NSIS](https://nsis.sourceforge.io/Download).
+- [vcpkg](https://learn.microsoft.com/en-us/vcpkg/get_started/get-started) Optional, dependencies can be provided by other means.
+- [NSIS](https://nsis.sourceforge.io/Download) Optional, Only to package an installer on Windows.
 
 ## VSCode
 
@@ -97,10 +98,7 @@ Example CMakeUserPresets.json to add custom paths to Ninja and vcpkg in presets:
         {
             "name": "user-default",
             "hidden": true,
-            "toolchainFile": "${sourceDir}/../vcpkg/scripts/buildsystems/vcpkg.cmake",
-            "cacheVariables": {
-                "CMAKE_MAKE_PROGRAM": "${sourceDir}/Bin/ninja.exe"
-            }
+            "toolchainFile": "${sourceDir}/../vcpkg/scripts/buildsystems/vcpkg.cmake"
         },
         {
             "name": "user-debug",
