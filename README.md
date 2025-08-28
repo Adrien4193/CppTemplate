@@ -11,12 +11,82 @@ My C++ template project (Windows only for now).
 - [vcpkg](https://learn.microsoft.com/en-us/vcpkg/get_started/get-started) Optional, dependencies can be provided by other means.
 - [NSIS](https://nsis.sourceforge.io/Download) Optional, Only to package an installer on Windows.
 
+## Building
+
+Make sure all CMake dependencies are available in PATH or use vcpkg to fetch them automatically by creating the following CMakeUserPresets.json besides CMakePresets.json:
+
+```json
+{
+    "version": 10,
+    "configurePresets": [
+        {
+            "name": "user-default",
+            "hidden": true,
+            "toolchainFile": "path/to/vcpkg/scripts/buildsystems/vcpkg.cmake"
+        },
+        {
+            "name": "user-debug",
+            "displayName": "User Debug",
+            "inherits": [
+                "user-default",
+                "debug"
+            ]
+        },
+        {
+            "name": "user-release",
+            "displayName": "User Release",
+            "inherits": [
+                "user-default",
+                "release"
+            ]
+        },
+        {
+            "name": "user-distribution",
+            "displayName": "User Distribution",
+            "inherits": [
+                "user-default",
+                "distribution"
+            ]
+        }
+    ],
+    "testPresets": [
+        {
+            "name": "user-debug",
+            "inherits": "debug",
+            "displayName": "User debug",
+            "configurePreset": "user-debug"
+        }
+    ],
+    "packagePresets": [
+        {
+            "name": "user-windows",
+            "inherits": "windows",
+            "displayName": "User Windows",
+            "configurePreset": "user-distribution"
+        }
+    ]
+}
+```
+
+Now the project can be built with:
+
+```shell
+# If you are using CMakeUserPresets.json
+cmake . --preset user-debug
+
+# OR if you not using CMakeUserPresets.json but have all dependencies in CMAKE_PREFIX_PATH.
+cmake . --preset debug
+
+# Then build
+cmake --build ./Build/user-debug
+```
+
 ## VSCode
 
 Example settings.json to have:
 
 - A custom terminal with Visual Studio Developer PowerShell.
-- CMake able to find cl.exe.
+- Visual studio CMake plugin able to find Visual Studio compile tools.
 - Ignore GoogleTest warnings with clang-tidy.
 
 ```json
@@ -27,7 +97,7 @@ Example settings.json to have:
             "args": [
                 "-NoExit",
                 "-Command",
-                "& \"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\Tools\\VsDevCmd.bat\""
+                "& \"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\Tools\\Launch-VsDevShell.ps1\" -Arch amd64"
             ]
         }
     },
@@ -36,7 +106,6 @@ Example settings.json to have:
         "Tests/": true
     }
 }
-
 ```
 
 Example tasks.json to build with CMake using Ctrl+Shift+B:
@@ -84,61 +153,6 @@ Example launch.json to debug apps and tests:
             "args": [
                 "${cmake.testArgs}"
             ]
-        }
-    ]
-}
-```
-
-Example CMakeUserPresets.json to add custom paths to Ninja and vcpkg in presets:
-
-```json
-{
-    "version": 10,
-    "configurePresets": [
-        {
-            "name": "user-default",
-            "hidden": true,
-            "toolchainFile": "${sourceDir}/../vcpkg/scripts/buildsystems/vcpkg.cmake"
-        },
-        {
-            "name": "user-debug",
-            "displayName": "User Debug",
-            "inherits": [
-                "user-default",
-                "debug"
-            ]
-        },
-        {
-            "name": "user-release",
-            "displayName": "User Release",
-            "inherits": [
-                "user-default",
-                "release"
-            ]
-        },
-        {
-            "name": "user-distribution",
-            "displayName": "User Distribution",
-            "inherits": [
-                "user-default",
-                "distribution"
-            ]
-        }
-    ],
-    "testPresets": [
-        {
-            "name": "user-debug",
-            "inherits": "debug",
-            "displayName": "User debug",
-            "configurePreset": "user-debug"
-        }
-    ],
-    "packagePresets": [
-        {
-            "name": "user-windows",
-            "inherits": "windows",
-            "displayName": "User Windows",
-            "configurePreset": "user-distribution"
         }
     ]
 }
