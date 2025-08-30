@@ -13,72 +13,36 @@ My C++ template project (Windows only for now).
 
 ## Building
 
-Make sure all CMake dependencies are available in PATH or use vcpkg to fetch them automatically by creating the following CMakeUserPresets.json besides CMakePresets.json:
+If you don't use vcpkg, make sure all CMake dependencies listed in [vcpkg.json](vcpkg.json) are available in PATH.
 
-```json
-{
-    "version": 10,
-    "configurePresets": [
-        {
-            "name": "user-default",
-            "hidden": true,
-            "toolchainFile": "path/to/vcpkg/scripts/buildsystems/vcpkg.cmake"
-        },
-        {
-            "name": "user-debug",
-            "displayName": "User Debug",
-            "inherits": [
-                "user-default",
-                "debug"
-            ]
-        },
-        {
-            "name": "user-release",
-            "displayName": "User Release",
-            "inherits": [
-                "user-default",
-                "release"
-            ]
-        },
-        {
-            "name": "user-distribution",
-            "displayName": "User Distribution",
-            "inherits": [
-                "user-default",
-                "distribution"
-            ]
-        }
-    ],
-    "testPresets": [
-        {
-            "name": "user-debug",
-            "inherits": "debug",
-            "displayName": "User debug",
-            "configurePreset": "user-debug"
-        }
-    ],
-    "packagePresets": [
-        {
-            "name": "user-windows",
-            "inherits": "windows",
-            "displayName": "User Windows",
-            "configurePreset": "user-distribution"
-        }
-    ]
-}
-```
+If you do use vcpkg, it will fetch the dependencies automatically when configuring CMake if you provide the correct toolchain file:
 
-Now the project can be built with:
+Here is how to build in debug assuming vcpkg repo is cloned in the parent folder of the current repo (see [CMakePresets.json](CMakePresets.json) for the list of available presets)
 
 ```shell
-# If you are using CMakeUserPresets.json
-cmake . --preset user-debug
+# With vcpkg
+cmake . --preset debug -DCMAKE_TOOLCHAIN_FILE="../vcpkg/scripts/buildsystems/vcpkg.cmake"
 
-# OR if you not using CMakeUserPresets.json but have all dependencies in CMAKE_PREFIX_PATH.
-cmake . --preset debug
+# OR without vcpkg it is just
+# cmake . --preset debug
 
-# Then build
-cmake --build ./Build/user-debug
+cmake --build --preset debug
+```
+
+## Testing
+
+Not for distribution preset.
+
+```shell
+ctest --preset debug
+```
+
+## Packaging
+
+Only for distribution preset, make sure to repeat the build steps replacing "debug" by "distribution".
+
+```shell
+cpack --preset distribution
 ```
 
 ## VSCode
@@ -88,6 +52,7 @@ Example settings.json to have:
 - A custom terminal with Visual Studio Developer PowerShell.
 - Visual studio CMake plugin able to find Visual Studio compile tools.
 - Ignore GoogleTest warnings with clang-tidy.
+- Provide automatically vcpkg toolchain file to CMake plugin.
 
 ```json
 {
@@ -102,6 +67,9 @@ Example settings.json to have:
         }
     },
     "cmake.useVsDeveloperEnvironment": "always",
+    "cmake.configureArgs": [
+        "-DCMAKE_TOOLCHAIN_FILE=${workspaceFolder}/../vcpkg/scripts/buildsystems/vcpkg.cmake"
+    ],
     "C_Cpp.codeAnalysis.exclude": {
         "Tests/": true
     }
