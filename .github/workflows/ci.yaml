@@ -4,7 +4,6 @@ on:
     branches: [master]
   push:
     branches: [master]
-
 jobs:
   build:
     name: ${{matrix.os}} ${{matrix.compiler}} ${{matrix.build_type}}}
@@ -16,10 +15,8 @@ jobs:
         compiler: [msvc]
         generator: [Ninja]
         preset: [debug, release, distribution]
-
     steps:
       - uses: actions/checkout@v4
-
       - name: Setup Cpp
         uses: aminya/setup-cpp@v1.7.1
         with:
@@ -29,14 +26,28 @@ jobs:
           ninja: true
           vcpkg: true
           clangtidy: "20.1.7"
-
       - name: Configure CMake
         if: ${{matrix.preset == 'debug'}}
         run: cmake . --preset ${{matrix.preset}} -DCMAKE_TOOLCHAIN_FILE='~/vcpkg/scripts/buildsystems/vcpkg.cmake' -DCMAKE_CXX_CLANG_TIDY='clang-tidy'
-
       - name: Build
         run: cmake --build --preset ${{matrix.preset}}
-
       - name: Test
         if: ${{preset == 'debug'}}
         run: ctest --preset ${{matrix.preset}}
+  format:
+    name: Formatting Check
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        path:
+          - "Source"
+          - "Applications"
+          - "Tests"
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run clang-format style check.
+        uses: jidicula/clang-format-action@v4.15.0
+        with:
+          clang-format-version: "20"
+          include-regex: .*\.hpp|.*\.cpp
+          check-path: "${{matrix.path}}"
