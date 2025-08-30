@@ -85,6 +85,7 @@ KeepEmptyLines:
   AtStartOfFile: false
 LambdaBodyIndentation: OuterScope
 Language: Cpp
+LineEnding: LF
 MainIncludeChar: Quote
 MaxEmptyLinesToKeep: 1
 NamespaceIndentation: All
