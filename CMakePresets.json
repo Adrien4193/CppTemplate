@@ -8,6 +8,8 @@
             "binaryDir": "${sourceDir}/Build/${presetName}",
             "installDir": "${sourceDir}/Install/${presetName}",
             "cacheVariables": {
+                "CMAKE_C_COMPILER": "cl",
+                "CMAKE_CXX_COMPILER": "cl",
                 "BUILD_SHARED_LIBS": true,
                 "ENABLE_APPLICATIONS": true,
                 "ENABLE_TESTS": true,

@@ -27,7 +27,7 @@ jobs:
           vcpkg: true
           clangtidy: "20.1.7"
       - name: Configure CMake
-        run: cmake . --preset ${{matrix.preset}} -DCMAKE_TOOLCHAIN_FILE='~/vcpkg/scripts/buildsystems/vcpkg.cmake'
+        run: cmake . --preset ${{matrix.preset}} -DCMAKE_TOOLCHAIN_FILE='~/vcpkg/scripts/buildsystems/vcpkg.cmake' -DCMAKE_CXX_CLANG_TIDY='clang-tidy'
       - name: Build
         run: cmake --build --preset ${{matrix.preset}}
       - name: Test
