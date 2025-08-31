@@ -8,6 +8,8 @@
             "binaryDir": "${sourceDir}/Build/${presetName}",
             "installDir": "${sourceDir}/Install/${presetName}",
             "cacheVariables": {
+                "CMAKE_C_COMPILER": "cl",
+                "CMAKE_CXX_COMPILER": "cl",
                 "BUILD_SHARED_LIBS": true,
                 "ENABLE_APPLICATIONS": true,
                 "ENABLE_TESTS": true,
@@ -40,11 +42,27 @@
             }
         }
     ],
+    "buildPresets": [
+        {
+            "name": "debug",
+            "displayName": "Debug",
+            "configurePreset": "debug"
+        },
+        {
+            "name": "release",
+            "displayName": "Release",
+            "configurePreset": "release"
+        },
+        {
+            "name": "distribution",
+            "displayName": "Distribution",
+            "configurePreset": "distribution"
+        }
+    ],
     "testPresets": [
         {
             "name": "default",
             "hidden": true,
-            "configurePreset": "default",
             "output": {
                 "outputOnFailure": true
             },
@@ -57,7 +75,15 @@
             "name": "debug",
             "displayName": "Debug",
             "inherits": "default",
+            "configurePreset": "debug",
             "configuration": "Debug"
+        },
+        {
+            "name": "release",
+            "displayName": "Release",
+            "inherits": "default",
+            "configurePreset": "release",
+            "configuration": "Release"
         }
     ],
     "packagePresets": [

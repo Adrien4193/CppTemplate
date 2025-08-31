@@ -1,0 +1,52 @@
+name: ci
+on:
+  pull_request:
+    branches: [master]
+  push:
+    branches: [master]
+jobs:
+  build:
+    name: ${{matrix.os}} ${{matrix.compiler}} ${{matrix.preset}}
+    runs-on: ${{matrix.os}}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [windows-latest]
+        compiler: [msvc]
+        generator: [Ninja]
+        preset: [debug, release, distribution]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup C++
+        uses: aminya/setup-cpp@v1.7.1
+        with:
+          compiler: ${{matrix.compiler}}
+          vcvarsall: ${{runner.os == 'Windows'}}
+          cmake: "4.0.3"
+          ninja: "1.13.0"
+          vcpkg: true
+          clangtidy: "20.1.7"
+      - name: Configure CMake
+        run: cmake . --preset ${{matrix.preset}} -DCMAKE_TOOLCHAIN_FILE='~/vcpkg/scripts/buildsystems/vcpkg.cmake' -DCMAKE_CXX_CLANG_TIDY='clang-tidy'
+      - name: Build
+        run: cmake --build --preset ${{matrix.preset}}
+      - name: Test
+        if: ${{matrix.preset != 'distribution'}}
+        run: ctest --preset ${{matrix.preset}}
+  format:
+    name: Formatting Check
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        path:
+          - "Source"
+          - "Applications"
+          - "Tests"
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run clang-format style check.
+        uses: jidicula/clang-format-action@v4.15.0
+        with:
+          clang-format-version: "20"
+          include-regex: .*\.hpp|.*\.cpp
+          check-path: "${{matrix.path}}"
