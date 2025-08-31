@@ -6,7 +6,7 @@ on:
     branches: [master]
 jobs:
   build:
-    name: ${{matrix.os}} ${{matrix.compiler}} ${{matrix.build_type}}
+    name: ${{matrix.os}} ${{matrix.compiler}} ${{matrix.preset}}
     runs-on: ${{matrix.os}}
     strategy:
       fail-fast: false
@@ -27,12 +27,11 @@ jobs:
           vcpkg: true
           clangtidy: "20.1.7"
       - name: Configure CMake
-        if: ${{matrix.preset == 'debug'}}
         run: cmake . --preset ${{matrix.preset}} -DCMAKE_TOOLCHAIN_FILE='~/vcpkg/scripts/buildsystems/vcpkg.cmake' -DCMAKE_CXX_CLANG_TIDY='clang-tidy'
       - name: Build
         run: cmake --build --preset ${{matrix.preset}}
       - name: Test
-        if: ${{matrix.preset == 'debug'}}
+        if: ${{matrix.preset != 'distribution'}}
         run: ctest --preset ${{matrix.preset}}
   format:
     name: Formatting Check

@@ -75,6 +75,13 @@
             "inherits": "default",
             "configurePreset": "debug",
             "configuration": "Debug"
+        },
+        {
+            "name": "release",
+            "displayName": "Release",
+            "inherits": "default",
+            "configurePreset": "release",
+            "configuration": "Release"
         }
     ],
     "packagePresets": [
