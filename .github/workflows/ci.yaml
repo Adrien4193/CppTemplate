@@ -22,8 +22,8 @@ jobs:
         with:
           compiler: ${{matrix.compiler}}
           vcvarsall: ${{runner.os == 'Windows'}}
-          cmake: true
-          ninja: true
+          cmake: "4.0.3"
+          ninja: "1.13.0"
           vcpkg: true
           clangtidy: "20.1.7"
       - name: Configure CMake
