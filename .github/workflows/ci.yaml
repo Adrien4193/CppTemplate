@@ -14,7 +14,7 @@ jobs:
         os: [windows-latest]
         compiler: [msvc]
         generator: [Ninja]
-        preset: [debug, release, distribution]
+        preset: [debug, release]
     steps:
       - uses: actions/checkout@v4
       - name: Setup C++
@@ -31,8 +31,10 @@ jobs:
       - name: Build
         run: cmake --build --preset ${{matrix.preset}}
       - name: Test
-        if: ${{matrix.preset != 'distribution'}}
         run: ctest --preset ${{matrix.preset}}
+      - name: CPack
+        if: ${{matrix.preset == 'release'}}
+        run: cpack --preset zip
   format:
     name: Formatting Check
     runs-on: ubuntu-latest
