@@ -15,34 +15,49 @@ My C++ template project (Windows only for now).
 
 If you don't use vcpkg, make sure all CMake dependencies listed in [vcpkg.json](vcpkg.json) are available in PATH.
 
-If you do use vcpkg, it will fetch the dependencies automatically when configuring CMake if you provide the correct toolchain file:
+If you use vcpkg, it will fetch the dependencies automatically when configuring CMake if you provide the correct toolchain file (see below).
 
-Here is how to build in debug assuming vcpkg repo is cloned in the parent folder of the current repo (see [CMakePresets.json](CMakePresets.json) for the list of available presets)
+See [CMakePresets.json](CMakePresets.json) for available presets or run `cmake --list-presets`.
 
-```shell
-# With vcpkg
-cmake . --preset debug -DCMAKE_TOOLCHAIN_FILE="../vcpkg/scripts/buildsystems/vcpkg.cmake"
+First setup some CMake variables (for example windows debug with vcpkg):
 
-# OR without vcpkg it is just
-# cmake . --preset debug
+```bash
+export $CMAKE_TOOLCHAIN_FILE=path/to/vcpkg/scripts/buildsystems/vcpkg.cmake
+export $CMAKE_CXX_COMPILER=g++
+export $CMAKE_BUILD_TYPE=Debug
+```
 
-cmake --build --preset debug
+Or:
+
+```powershell
+$Env:CMAKE_TOOLCHAIN_FILE = "path/to/vcpkg/scripts/buildsystems/vcpkg.cmake"
+$Env:CMAKE_CXX_COMPILER = "g++"
+$Env:CMAKE_BUILD_TYPE = "Debug"
+```
+
+Then run CMake:
+
+```bash
+cmake . --preset windows
+cmake --build --preset windows
 ```
 
 ## Testing
 
-Not for distribution preset.
-
 ```shell
-ctest --preset debug
+ctest --preset windows
 ```
 
 ## Packaging
 
-Only for distribution preset, make sure to repeat the build steps replacing "debug" by "distribution".
+```shell
+cpack --preset windows
+```
+
+## Workflows
 
 ```shell
-cpack --preset distribution
+cmake --workflow --preset windows
 ```
 
 ## VSCode
@@ -120,6 +135,121 @@ Example launch.json to debug apps and tests:
             "cwd": "${workspaceFolder}",
             "args": [
                 "${cmake.testArgs}"
+            ]
+        }
+    ]
+}
+```
+
+## User presets
+
+For convenience, it is easier to set toolchain file, build type or compiler in a CMakeUserPresets.json at the root of the repo:
+
+```json
+{
+    "version": 10,
+    "configurePresets": [
+        {
+            "name": "user",
+            "hidden": true,
+            "inherits": "windows",
+            "toolchainFile": "${sourceDir}/../vcpkg/scripts/buildsystems/vcpkg.cmake",
+            "cacheVariables": {
+                "CMAKE_CXX_COMPILER": "cl"
+            }
+        },
+        {
+            "name": "debug",
+            "inherits": "user",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Debug"
+            }
+        },
+        {
+            "name": "release",
+            "inherits": "user",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Release"
+            }
+        }
+    ],
+    "buildPresets": [
+        {
+            "name": "debug",
+            "inherits": "windows",
+            "configurePreset": "debug"
+        },
+        {
+            "name": "release",
+            "inherits": "windows",
+            "configurePreset": "release"
+        }
+    ],
+    "testPresets": [
+        {
+            "name": "debug",
+            "inherits": "windows",
+            "configurePreset": "debug"
+        },
+        {
+            "name": "release",
+            "inherits": "windows",
+            "configurePreset": "release"
+        }
+    ],
+    "packagePresets": [
+        {
+            "name": "debug",
+            "inherits": "windows",
+            "configurePreset": "debug"
+        },
+        {
+            "name": "release",
+            "inherits": "windows",
+            "configurePreset": "release"
+        }
+    ],
+    "workflowPresets": [
+        {
+            "name": "debug",
+            "steps": [
+                {
+                    "type": "configure",
+                    "name": "debug"
+                },
+                {
+                    "type": "build",
+                    "name": "debug"
+                },
+                {
+                    "type": "test",
+                    "name": "debug"
+                },
+                {
+                    "type": "package",
+                    "name": "debug"
+                }
+            ]
+        },
+        {
+            "name": "release",
+            "steps": [
+                {
+                    "type": "configure",
+                    "name": "release"
+                },
+                {
+                    "type": "build",
+                    "name": "release"
+                },
+                {
+                    "type": "test",
+                    "name": "release"
+                },
+                {
+                    "type": "package",
+                    "name": "release"
+                }
             ]
         }
     ]

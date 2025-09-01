@@ -8,7 +8,6 @@
             "binaryDir": "${sourceDir}/Build/${presetName}",
             "installDir": "${sourceDir}/Install/${presetName}",
             "cacheVariables": {
-                "CMAKE_CXX_COMPILER": "cl",
                 "BUILD_SHARED_LIBS": true,
                 "ENABLE_APPLICATIONS": true,
                 "ENABLE_TESTS": true,
@@ -16,28 +15,27 @@
             }
         },
         {
-            "name": "debug",
+            "name": "windows",
             "inherits": "default",
-            "cacheVariables": {
-                "CMAKE_BUILD_TYPE": "Debug"
-            }
-        },
-        {
-            "name": "release",
-            "inherits": "default",
-            "cacheVariables": {
-                "CMAKE_BUILD_TYPE": "Release"
+            "condition": {
+                "type": "equals",
+                "lhs": "${hostSystemName}",
+                "rhs": "Windows"
+            },
+            "architecture": {
+                "value": "x64",
+                "strategy": "external"
+            },
+            "toolset": {
+                "value": "host=x64",
+                "strategy": "external"
             }
         }
     ],
     "buildPresets": [
         {
-            "name": "debug",
-            "configurePreset": "debug"
-        },
-        {
-            "name": "release",
-            "configurePreset": "release"
+            "name": "windows",
+            "configurePreset": "windows"
         }
     ],
     "testPresets": [
@@ -53,39 +51,22 @@
             }
         },
         {
-            "name": "debug",
+            "name": "windows",
             "inherits": "default",
-            "configurePreset": "debug"
-        },
-        {
-            "name": "release",
-            "inherits": "default",
-            "configurePreset": "release"
+            "configurePreset": "windows"
         }
     ],
     "packagePresets": [
         {
             "name": "default",
             "hidden": true,
-            "configurePreset": "release",
             "vendorName": "Adrien4193",
             "packageDirectory": "packages"
         },
         {
-            "name": "zip",
+            "name": "windows",
             "inherits": "default",
-            "generators": [
-                "ZIP"
-            ]
-        },
-        {
-            "name": "nsis",
-            "inherits": "default",
-            "condition": {
-                "type": "equals",
-                "lhs": "${hostSystemName}",
-                "rhs": "Windows"
-            },
+            "configurePreset": "windows",
             "generators": [
                 "NSIS64"
             ]
@@ -93,23 +74,23 @@
     ],
     "workflowPresets": [
         {
-            "name": "release",
+            "name": "windows",
             "steps": [
                 {
                     "type": "configure",
-                    "name": "release"
+                    "name": "windows"
                 },
                 {
                     "type": "build",
-                    "name": "release"
+                    "name": "windows"
                 },
                 {
                     "type": "test",
-                    "name": "release"
+                    "name": "windows"
                 },
                 {
                     "type": "package",
-                    "name": "nsis"
+                    "name": "windows"
                 }
             ]
         }
