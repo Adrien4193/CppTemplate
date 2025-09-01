@@ -11,5 +11,5 @@ TEST(Lib1, Dummy1)
 
 TEST(Lib1, Dummy2)
 {
-    EXPECT_EQ(Lib1(2), 2);
+     EXPECT_EQ(Lib1(2), 2);
 }
