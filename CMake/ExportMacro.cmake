@@ -11,7 +11,7 @@ function(define_export_macro TARGET)
         return()
     endif()
 
-    if(MSVC)
+    if(WIN32)
         target_compile_definitions(
             ${TARGET}
             INTERFACE "${MACRO_NAME}=__declspec(dllimport)"
