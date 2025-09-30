@@ -9,44 +9,33 @@ project(
 )
 
 option(BUILD_SHARED_LIBS "Build using shared libraries" ON)
-option(ENABLE_APPLICATIONS "Build applications" ON)
-option(ENABLE_TESTS "Build tests" ON)
-
-if(ENABLE_TESTS)
-    find_package(GTest CONFIG REQUIRED)
-endif()
+option(BUILD_APPLICATIONS "Build application" ON)
+option(BUILD_TESTS "Build tests" ON)
 
 list(PREPEND CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/CMake)
+
+include(CompileOptions)
 
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
-set(CMAKE_CXX_VISIBILITY_PRESET hidden)
-set(CMAKE_VISIBILITY_INLINES_HIDDEN ON)
+include(GNUInstallDirs)
 
-set(CMAKE_CXX_STANDARD 23)
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
-set(CMAKE_CXX_EXTENSIONS OFF)
+set(PROJECT_INSTALL_CONFIGDIR cmake)
 
-set(CMAKE_COMPILE_WARNING_AS_ERROR ON)
+include(Application)
+include(Library)
 
-if(MSVC)
-    add_compile_options(/W4)
-else()
-    add_compile_options(-Wall -Wextra -Wpedantic -Wconversion)
-endif()
+add_subdirectory(Source/${PROJECT_NAME})
 
-add_subdirectory(Source/Template)
-
-if(ENABLE_APPLICATIONS)
+if(BUILD_APPLICATIONS)
     add_subdirectory(Applications)
 endif()
 
-if(ENABLE_TESTS)
+if(BUILD_TESTS)
     include(CTest)
     add_subdirectory(Tests)
 endif()
 
 include(Package)
-configure_package()
