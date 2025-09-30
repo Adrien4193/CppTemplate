@@ -1,5 +1,6 @@
-include(Application)
-configure_application(Application "" Application.cpp)
+add_executable(Application)
+
+configure_application(Application Application.cpp)
 
 target_link_libraries(
     Application
@@ -7,3 +8,5 @@ target_link_libraries(
     Template::Lib1
     Template::Lib2
 )
+
+install_application(Application)

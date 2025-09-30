@@ -1,16 +1,14 @@
+include(ExportMacro)
+
 function(configure_library TARGET HEADERS SOURCES)
-    add_library(${TARGET})
     add_library(${PROJECT_NAME}::${TARGET} ALIAS ${TARGET})
 
     set_target_properties(${TARGET} PROPERTIES OUTPUT_NAME ${PROJECT_NAME}${TARGET})
 
     target_sources(
         ${TARGET}
-        PUBLIC
-        FILE_SET HEADERS
-        FILES ${HEADERS}
-        PRIVATE
-        ${SOURCES}
+        PUBLIC FILE_SET HEADERS FILES ${HEADERS}
+        PRIVATE ${SOURCES}
     )
 
     target_include_directories(
@@ -20,18 +18,33 @@ function(configure_library TARGET HEADERS SOURCES)
         $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>
     )
 
-    include(ExportMacro)
     define_export_macro(${TARGET})
+endfunction()
 
-    include(GNUInstallDirs)
-
+function(install_library TARGET)
     install(
         TARGETS ${TARGET}
-        EXPORT ${PROJECT_NAME}Targets
-        LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
-        ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
-        RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
-        BUNDLE DESTINATION ${CMAKE_INSTALL_BINDIR}
-        FILE_SET HEADERS DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/${PROJECT_NAME}/${TARGET}
+        EXPORT ${TARGET}Targets
+        RUNTIME
+        DESTINATION ${CMAKE_INSTALL_BINDIR}
+        COMPONENT Runtime
+        LIBRARY
+        DESTINATION ${CMAKE_INSTALL_LIBDIR}
+        COMPONENT Runtime
+        NAMELINK_COMPONENT Development
+        ARCHIVE
+        DESTINATION ${CMAKE_INSTALL_LIBDIR}
+        COMPONENT Development
+        FILE_SET HEADERS
+        DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/${PROJECT_NAME}/${TARGET}
+        COMPONENT Development
+    )
+
+    install(
+        EXPORT ${TARGET}Targets
+        FILE ${PROJECT_NAME}${TARGET}Targets.cmake
+        DESTINATION ${PROJECT_INSTALL_CONFIGDIR}
+        NAMESPACE ${PROJECT_NAME}::
+        COMPONENT Development
     )
 endfunction()
