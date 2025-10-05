@@ -24,6 +24,8 @@ include(GNUInstallDirs)
 
 set(PROJECT_INSTALL_CONFIGDIR cmake)
 
+include(PackageOptions)
+
 include(Application)
 include(Library)
 

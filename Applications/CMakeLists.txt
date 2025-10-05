@@ -9,4 +9,8 @@ target_link_libraries(
     Template::Lib2
 )
 
-install_application(Application)
+install_application(
+    Application
+    DESCRIPTION "This is an application"
+    DEPENDS Lib1 Lib2
+)
