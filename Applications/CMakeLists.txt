@@ -5,8 +5,8 @@ configure_application(Application Application.cpp)
 target_link_libraries(
     Application
     PRIVATE
-    Template::Lib1
-    Template::Lib2
+    ${PROJECT_NAME}::Lib1
+    ${PROJECT_NAME}::Lib2
 )
 
 install_application(

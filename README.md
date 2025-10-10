@@ -9,7 +9,7 @@ My C++ template project (Windows only for now).
 - [CMake](https://cmake.org/download).
 - [Ninja](https://ninja-build.org).
 - [vcpkg](https://learn.microsoft.com/en-us/vcpkg/get_started/get-started) Optional, dependencies can be provided by other means.
-- [NSIS](https://nsis.sourceforge.io/Download) Optional, Only to package an installer on Windows.
+- [NSIS](https://nsis.sourceforge.io/Download) Optional, only to package an installer on Windows.
 
 ## Building
 
@@ -67,7 +67,6 @@ Example settings.json to have:
 - A custom terminal with Visual Studio Developer PowerShell.
 - Visual studio CMake plugin able to find Visual Studio compile tools.
 - Ignore GoogleTest warnings with clang-tidy.
-- Provide automatically vcpkg toolchain file to CMake plugin.
 
 ```json
 {
@@ -82,9 +81,6 @@ Example settings.json to have:
         }
     },
     "cmake.useVsDeveloperEnvironment": "always",
-    "cmake.configureArgs": [
-        "-DCMAKE_TOOLCHAIN_FILE=${workspaceFolder}/../vcpkg/scripts/buildsystems/vcpkg.cmake"
-    ],
     "C_Cpp.codeAnalysis.exclude": {
         "Tests/": true
     }
