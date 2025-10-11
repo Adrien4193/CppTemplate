@@ -43,6 +43,8 @@ CheckOptions:
     value: UPPER_CASE
   - key: readability-identifier-naming.MemberCase
     value: camelBack
+  - key: readability-identifier-naming.PrivateMemberCase
+    value: camelBack
   - key: readability-identifier-naming.PrivateMemberPrefix
     value: m_
   - key: readability-identifier-naming.NamespaceCase
