@@ -80,6 +80,7 @@ Example settings.json to have:
             ]
         }
     },
+    "terminal.integrated.defaultProfile.windows": "Developer PowerShell",
     "cmake.useVsDeveloperEnvironment": "always",
     "C_Cpp.codeAnalysis.exclude": {
         "Tests/": true
