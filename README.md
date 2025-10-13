@@ -150,8 +150,6 @@ For convenience, it is easier to set toolchain file, build type or compiler in a
             "name": "user",
             "hidden": true,
             "inherits": "windows",
-            "binaryDir": "${sourceDir}/Build/${presetName}",
-            "installDir": "${sourceDir}/Install/${presetName}",
             "toolchainFile": "${sourceDir}/../vcpkg/scripts/buildsystems/vcpkg.cmake",
             "cacheVariables": {
                 "CMAKE_CXX_COMPILER": "cl"
