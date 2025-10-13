@@ -31,7 +31,7 @@ Or:
 
 ```powershell
 $Env:CMAKE_TOOLCHAIN_FILE = "path/to/vcpkg/scripts/buildsystems/vcpkg.cmake"
-$Env:CMAKE_CXX_COMPILER = "g++"
+$Env:CMAKE_CXX_COMPILER = "cl"
 $Env:CMAKE_BUILD_TYPE = "Debug"
 ```
 

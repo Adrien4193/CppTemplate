@@ -105,7 +105,7 @@ QualifierAlignment: Custom
 QualifierOrder: ["static", "inline", "const", "volatile", "type"]
 ReferenceAlignment: Right
 ReflowComments: false
-RequiresClausePosition: WithPreceding
+RequiresClausePosition: SingleLine
 RequiresExpressionIndentation: OuterScope
 SeparateDefinitionBlocks: Always
 ShortNamespaceLines: 1
