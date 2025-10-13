@@ -9,7 +9,6 @@ jobs:
     name: ${{matrix.os.name}} ${{matrix.compiler.name}} ${{matrix.build-type}}
     runs-on: ${{matrix.os.name}}
     env:
-      CMAKE_BINARY_DIR: Build
       CMAKE_TOOLCHAIN_FILE: ~/vcpkg/scripts/buildsystems/vcpkg.cmake
       CMAKE_CXX_COMPILER: ${{matrix.compiler.path}}
       CMAKE_BUILD_TYPE: ${{matrix.build-type}}
