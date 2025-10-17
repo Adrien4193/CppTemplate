@@ -4,7 +4,7 @@
 
 using namespace Template;
 
-TEST(Lib2, Dummy)
+TEST(Test2, Dummy)
 {
     EXPECT_EQ(Lib2(2), 4);
 }
