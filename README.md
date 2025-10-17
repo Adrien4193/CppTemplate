@@ -62,10 +62,12 @@ cmake --workflow --preset windows
 
 ## VSCode
 
-Example settings.json to have:
+Example ``settings.json`` to have:
 
 - A custom terminal with Visual Studio Developer PowerShell.
 - Visual studio CMake plugin able to find Visual Studio compile tools.
+- Test suites nicely displayed as a tree in the test explorer.
+- The correct debug configuration used from launch.json when a test is debugged.
 - Ignore GoogleTest warnings with clang-tidy.
 
 ```json
@@ -82,13 +84,15 @@ Example settings.json to have:
     },
     "terminal.integrated.defaultProfile.windows": "Developer PowerShell",
     "cmake.useVsDeveloperEnvironment": "always",
+    "cmake.ctest.testSuiteDelimiter": "\\.",
+    "cmake.ctest.debugLaunchTarget": "(ctest) Launch",
     "C_Cpp.codeAnalysis.exclude": {
         "Tests/": true
     }
 }
 ```
 
-Example tasks.json to build with CMake using Ctrl+Shift+B:
+Example ``tasks.json`` to build with CMake using Ctrl+Shift+B:
 
 ```json
 {
@@ -110,7 +114,7 @@ Example tasks.json to build with CMake using Ctrl+Shift+B:
 }
 ```
 
-Example launch.json to debug apps and tests:
+Example ``launch.json`` to debug apps and tests:
 
 ```json
 {
@@ -140,7 +144,7 @@ Example launch.json to debug apps and tests:
 
 ## User presets
 
-For convenience, it is easier to set toolchain file, build type or compiler in a CMakeUserPresets.json at the root of the repo:
+For convenience, it is easier to set toolchain file, build type or compiler in a ``CMakeUserPresets.json`` at the root of the repo:
 
 ```json
 {
