@@ -1,8 +1,8 @@
 #include <gtest/gtest.h>
 
-#include <Template/Lib2/Lib2.hpp>
+#include <CppTemplate/Lib2/Lib2.hpp>
 
-using namespace Template;
+using namespace CppTemplate;
 
 TEST(Test2, Dummy)
 {
