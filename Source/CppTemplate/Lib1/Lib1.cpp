@@ -1,6 +1,6 @@
 #include "Lib1.hpp"
 
-namespace Template
+namespace CppTemplate
 {
     auto Lib1(int value) -> int
     {

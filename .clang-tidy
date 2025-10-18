@@ -16,7 +16,7 @@ Checks:
   - -readability-magic-numbers
 
 WarningsAsErrors: "*"
-HeaderFilterRegex: "Source[\\/]Template.*"
+HeaderFilterRegex: "Source[\\/]CppTemplate.*"
 
 CheckOptions:
   - key: readability-identifier-naming.ClassCase

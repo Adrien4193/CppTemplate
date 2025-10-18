@@ -1,7 +1,7 @@
 #include <print>
 
-#include <Template/Lib1/Lib1.hpp>
-#include <Template/Lib2/Lib2.hpp>
+#include <CppTemplate/Lib1/Lib1.hpp>
+#include <CppTemplate/Lib2/Lib2.hpp>
 
 // NOLINTNEXTLINE(bugprone-exception-escape)
 auto main(int argc, const char **argv) -> int
@@ -13,6 +13,6 @@ auto main(int argc, const char **argv) -> int
         std::println("argv [{}]: {}", i, argv[i]);
     }
 
-    std::println("Lib1: {}", Template::Lib1(1));
-    std::println("Lib2: {}", Template::Lib2(2));
+    std::println("Lib1: {}", CppTemplate::Lib1(1));
+    std::println("Lib2: {}", CppTemplate::Lib2(2));
 }

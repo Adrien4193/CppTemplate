@@ -1,8 +1,8 @@
 #include "Lib2.hpp"
 
-#include <Template/Lib1/Lib1.hpp>
+#include <CppTemplate/Lib1/Lib1.hpp>
 
-namespace Template
+namespace CppTemplate
 {
     auto Lib2(int value) -> int
     {

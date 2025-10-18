@@ -1,7 +1,7 @@
 ﻿cmake_minimum_required(VERSION 4.0.3)
 
 project(
-    Template
+    CppTemplate
     VERSION 0.1.0
     DESCRIPTION "C++ template"
     HOMEPAGE_URL https://github.com/Adrien4193/CppTemplate
