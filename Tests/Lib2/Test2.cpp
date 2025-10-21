@@ -4,7 +4,7 @@
 
 using namespace CppTemplate;
 
-TEST(Test2, Dummy)
+TEST(Test2, Dummy) // NOLINT
 {
     EXPECT_EQ(Lib2(2), 4);
 }
