@@ -4,12 +4,12 @@
 
 using namespace CppTemplate;
 
-TEST(Test1, Dummy1)
+TEST(Test1, Dummy1) // NOLINT
 {
     EXPECT_EQ(Lib1(1), 1);
 }
 
-TEST(Test1, Dummy2)
+TEST(Test1, Dummy2) // NOLINT
 {
     EXPECT_EQ(Lib1(2), 2);
 }

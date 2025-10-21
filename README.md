@@ -68,7 +68,6 @@ Example ``settings.json`` to have:
 - Visual studio CMake plugin able to find Visual Studio compile tools.
 - Test suites nicely displayed as a tree in the test explorer.
 - The correct debug configuration used from launch.json when a test is debugged.
-- Ignore GoogleTest warnings with clang-tidy.
 
 ```json
 {
@@ -85,10 +84,7 @@ Example ``settings.json`` to have:
     "terminal.integrated.defaultProfile.windows": "Developer PowerShell",
     "cmake.useVsDeveloperEnvironment": "always",
     "cmake.ctest.testSuiteDelimiter": "\\.",
-    "cmake.ctest.debugLaunchTarget": "(ctest) Launch",
-    "C_Cpp.codeAnalysis.exclude": {
-        "Tests/": true
-    }
+    "cmake.ctest.debugLaunchTarget": "(ctest) Launch"
 }
 ```
 
