@@ -4,12 +4,12 @@ My C++ template project (Windows only for now).
 
 ## Requirements
 
-- [Git](https://git-scm.com/downloads).
-- [Visual Studio 2022](https://visualstudio.microsoft.com/downloads/#remote-tools-for-visual-studio-2022).
-- [CMake](https://cmake.org/download).
-- [Ninja](https://ninja-build.org).
-- [vcpkg](https://learn.microsoft.com/en-us/vcpkg/get_started/get-started) Optional, dependencies can be provided by other means.
-- [NSIS](https://nsis.sourceforge.io/Download) Optional, only to package an installer on Windows.
+- [Git](https://git-scm.com/downloads)
+- [Visual Studio 2022](https://visualstudio.microsoft.com/downloads/#remote-tools-for-visual-studio-2022)
+- [CMake](https://cmake.org/download)
+- [Ninja](https://ninja-build.org)
+- [vcpkg](https://learn.microsoft.com/en-us/vcpkg/get_started/get-started) (Optional, dependencies can be provided by other means)
+- [NSIS](https://nsis.sourceforge.io/Download) (Optional, only for Windows installer)
 
 ## Building
 
@@ -150,7 +150,7 @@ For convenience, it is easier to set toolchain file, build type or compiler in a
             "name": "user",
             "hidden": true,
             "inherits": "windows",
-            "toolchainFile": "${sourceDir}/../vcpkg/scripts/buildsystems/vcpkg.cmake",
+            "toolchainFile": "path/to/vcpkg/scripts/buildsystems/vcpkg.cmake",
             "cacheVariables": {
                 "CMAKE_CXX_COMPILER": "cl"
             }
