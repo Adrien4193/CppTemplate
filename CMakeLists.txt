@@ -22,7 +22,7 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
 include(GNUInstallDirs)
 
-set(PROJECT_INSTALL_CONFIGDIR cmake)
+set(CONFIG_INSTALL_DIRECTORY cmake)
 
 include(PackageOptions)
 
