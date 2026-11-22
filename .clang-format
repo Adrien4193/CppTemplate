@@ -234,7 +234,6 @@ SortIncludes:
   Enabled: true
   IgnoreCase: false
   IgnoreExtension: true
-  Natural: true
 SortJavaStaticImport: Before
 SortUsingDeclarations: LexicographicNumeric
 SpaceAfterCStyleCast: false
